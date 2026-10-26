@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Раздатка №1 — Редактирование макета: маска, расширение кадра и увеличение | ИИ в дизайне</title>
+<style>
+:root{--ink:#1a2330;--muted:#5b6673;--line:#dfe4ea;--bg:#f7f8fa;--card:#fff;--accent:#5b2c8a;--accent2:#0f7b6c;--warn:#b8860b;--warnbg:#fff8e6;--free:#0f7b6c;--freebg:#e6f5f2;--new:#b03030;--pay:#8a6100}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased}
+header{background:var(--accent);color:#fff;padding:32px 24px}
+header .wrap{max-width:1080px;margin:0 auto}
+header .badge{display:inline-block;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.3);padding:4px 12px;border-radius:20px;font-size:13px;font-weight:600}
+header h1{font-size:29px;line-height:1.25;margin:14px 0 10px;font-weight:700}
+header p{font-size:16px;opacity:.92;max-width:780px}
+header .meta{font-size:14px;opacity:.8;margin-top:14px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+main{padding:32px 0 56px}
+section{margin-bottom:44px}
+h2{font-size:22px;margin-bottom:8px;font-weight:700}
+h2 + .lead{color:var(--muted);font-size:15px;margin-bottom:18px}
+h3{font-size:17px;margin:24px 0 10px;font-weight:650}
+h4{font-size:15.5px;margin:0 0 6px;color:var(--accent)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:20px 22px;margin-bottom:16px}
+.alert{border-left:4px solid var(--warn);background:var(--warnbg);border-radius:0 8px 8px 0}
+.alert strong{color:#8a6100}
+.good{border-left:4px solid var(--accent2);background:var(--freebg);border-radius:0 8px 8px 0}
+.good strong{color:#0b5f53}
+.free-badge{display:inline-block;background:var(--freebg);color:var(--free);font-size:11.5px;font-weight:700;padding:3px 9px;border-radius:4px;border:1px solid #bfe3dc;white-space:nowrap}
+.pay-badge{display:inline-block;background:#fdf3dd;color:var(--pay);font-size:11.5px;font-weight:700;padding:3px 9px;border-radius:4px;border:1px solid #ecdcae;white-space:nowrap}
+.new-badge{display:inline-block;background:#fdecec;color:var(--new);font-size:11.5px;font-weight:700;padding:3px 9px;border-radius:4px;border:1px solid #f3c9c9;white-space:nowrap}
+table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden;font-size:14.5px}
+th{background:#eef1f5;text-align:left;padding:12px 14px;font-weight:650;font-size:13px;color:#3d4753;border-bottom:2px solid var(--line)}
+td{padding:12px 14px;border-bottom:1px solid #eceff2;vertical-align:top}
+tr:last-child td{border-bottom:none}
+tr.pick{background:#f4faf8}
+.mname{font-weight:650}
+.mid{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;color:var(--muted);word-break:break-all;margin-top:2px}
+.price{font-variant-numeric:tabular-nums;font-weight:600;white-space:nowrap}
+.tblwrap{overflow-x:auto;border-radius:10px;border:1px solid var(--line);background:var(--card);border-collapse:separate}
+.tblwrap table{border:none}
+ul,ol{margin:10px 0 10px 22px}
+li{margin-bottom:7px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin:16px 0}
+.mini{background:var(--card);border:1px solid var(--line);border-radius:9px;padding:16px 18px}
+.mini p{font-size:14px;color:var(--muted)}
+.prompt{background:#f4f6f8;border:1px solid #e2e6eb;border-left:3px solid var(--accent);border-radius:0 7px 7px 0;padding:13px 16px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:13.5px;color:#2b3442;margin:12px 0;white-space:pre-wrap;line-height:1.55}
+.prompt-lbl{font-size:13px;font-weight:650;color:var(--accent);margin:16px 0 4px}
+a{color:var(--accent)}
+.check li{list-style:none;position:relative;padding-left:28px;margin-bottom:9px}
+.check li:before{content:"\25A1";position:absolute;left:0;top:-1px;font-size:17px;color:var(--accent2);font-weight:700}
+.steps{counter-reset:s;list-style:none;margin:16px 0;padding:0}
+.steps li{counter-increment:s;position:relative;padding-left:44px;margin-bottom:14px}
+.steps li:before{content:counter(s);position:absolute;left:0;top:0;width:30px;height:30px;border-radius:50%;background:var(--accent);color:#fff;font-size:15px;font-weight:700;display:flex;align-items:center;justify-content:center}
+footer{background:#1f2732;color:#9aa5b1;padding:26px 24px;font-size:13.5px}
+footer .wrap{max-width:1080px;margin:0 auto}
+footer a{color:#c9a6e8}
+@media(max-width:640px){header h1{font-size:23px}main{padding:24px 0 40px}th,td{padding:10px 11px;font-size:13.5px}.steps li{padding-left:38px}}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+<span class="badge">Раздаточный материал №1</span>
+<h1>Редактирование макета: маска, расширение кадра и увеличение</h1>
+<p>Три операции, из-за которых правки в графическом редакторе занимают часы. Здесь — пошаговый порядок, готовые формулировки для ИИ и таблица разбора ошибок.</p>
+<div class="meta">Занятие 3 · 26 октября 2026 · тарифы и цены проверены 26 октября 2026</div>
+</div></header>
+<main><div class="wrap">
+
+<section>
+<h2>Главная мысль</h2>
+<p class="lead">Правка макетом в ИИ занимает 2–5 минут, если задача сформулирована как «что должно быть в выделенном месте». Ручная работа в Photoshop на ту же задачу — 20–40 минут. Разница не в качестве, а в том, что ИИ делает за вас первичную отрисовку, а вы задаёте границы.</p>
+</section>
+
+<section>
+<h2>Короткий ответ: какой способ выбрать</h2>
+<p class="lead">Три операции — три разных инструмента и три разных повода.</p>
+<div class="tblwrap"><table>
+<thead><tr><th>Задача</th><th>Операция</th><th>Чем делать</th><th>Результат</th></tr></thead>
+<tbody>
+<tr class="pick"><td>Убрать объект, заменить деталь, поправить цвет фрагмента</td><td>Правка маской</td><td><strong>Scumble</strong> (бесплатно, ключ Replicate), Nano Banana Pro в syntx.ai</td><td>Изменён только выделенный фрагмент, остальное сохранено</td></tr>
+<tr class="pick"><td>Макет 1:1, а нужен 16:9 или 9:16</td><td>Расширение кадра (outpaint)</td><td><strong>Scumble</strong> (Extend canvas), Genspark, syntx.ai</td><td>Кадр расширен в нужную сторону, стиль сохранён</td></tr>
+<tr class="pick"><td>Картинка маленькая, а нужна для печати или билборда</td><td>Увеличение разрешения (upscale)</td><td><strong>Scumble</strong> (Upscale), Topaz и Magnific в syntx.ai</td><td>Разрешение выше, детализация не добавилась — но артефакты не появились</td></tr>
+<tr><td>Заменить фон, оставив объект без изменений</td><td>Правка по описанию</td><td>Nano Banana Pro в syntx.ai, MiniMax AI Image Editor</td><td>Фон новый, силуэт и надписи сохранены</td></tr>
+</tbody></table></div>
+
+<div class="card good">
+<strong>Основной инструмент занятия — Scumble.</strong> Это бесплатная программа, где все три операции делаются в одном редакторе, а ответ модели ложится отдельным слоем и выгружается в PSD со слоями. Постановка и регистрация Replicate — в <a href="https://mrvolkomorov.github.io/irina-scumble-guide/" target="_blank">раздатке №6</a>.
+</div>
+</section>
+
+<section>
+<h2>1. Правка маской — когда фон трогать нельзя</h2>
+<div class="grid">
+<div class="mini"><h4>Как устроена маска</h4><p>Границы правки задаёт человек. Закрашенная область перерисовывается, всё остальное сохраняется попиксельно. Это единственный способ, при котором композиция макета не «плывёт».</p></div>
+<div class="mini"><h4>Что писать</h4><p>Описание того, что должно оказаться в выделенном месте: предмет, материал, цвет. Чем конкретнее фактура и цвет, тем чище результат.</p></div>
+<div class="mini"><h4>Где работает</h4><p>Genspark — стирание области прямо в интерфейсе. Recraft — маска с настройкой кисти. Nano Banana Pro в syntx.ai — правка по описанию с выделением области.</p></div>
+</div>
+
+<h3>Порядок работы</h3>
+<ol class="steps">
+<li>Открыть макет и сохранить копию. Исходник не перезаписывать никогда — правка идёт поверх копии.</li>
+<li>Выделить область. Запас 3–5 мм вокруг объекта, иначе на границе останется видимый шов.</li>
+<li>Описать результат: что должно быть, какой материал, какой цвет.</li>
+<li>Добавить фразу «остальное не менять» — это снимает главный риск, когда модель цепляет соседние элементы.</li>
+<li>Сравнить результат с оригиналом по трём точкам: граница правки, цвет прилегающих элементов, надписи.</li>
+<li>Если не подошло — не повторять тот же запрос, а уточнить формулировку или сменить инструмент.</li>
+</ol>
+
+<p class="prompt-lbl">Готовая формулировка для правки:</p>
+<div class="prompt">Замени область внутри маски на [предмет и материал].
+Цвет: [цвет]. Фактура: [описание].
+Остальные элементы кадра, включая надписи и логотип,
+оставить без изменений.</div>
+
+<p class="prompt-lbl">Если нужно заменить один объект на другой:</p>
+<div class="prompt">В выделенной области должен быть [новый предмет], того же размера
+и в том же ракурсе, что исходный. Сохранить тень и отражение.
+Надписи и остальные объекты кадра не трогать.</div>
+</section>
+
+<section>
+<h2>2. Расширение кадра — когда меняются пропорции</h2>
+<p class="lead">Самая частая операция в адаптации: один макет, пять форматов площадок.</p>
+
+<div class="tblwrap"><table>
+<thead><tr><th>Куда</th><th>Размер, px</th><th>На что влияет</th></tr></thead>
+<tbody>
+<tr><td>Instagram-пост</td><td>1080 × 1080</td><td>Квадрат. Расширять по вертикали, если исходник шире</td></tr>
+<tr><td>Instagram-сторис</td><td>1080 × 1920</td><td>Вертикаль. Safe Zone сверху и снизу ~250 px</td></tr>
+<tr><td>Telegram-превью</td><td>1280 × 720</td><td>Широкий кадр, текст по центру</td></tr>
+<tr><td>Слайд презентации</td><td>1920 × 1080</td><td>Тот же 16:9, но с запасом под лого</td></tr>
+<tr><td>Печать A4 / A5</td><td>2480 × 3508 (300 dpi)</td><td>Только CMYK, разрешение исходника — не ниже 300 dpi</td></tr>
+</tbody></table></div>
+
+<h3>Порядок работы</h3>
+<ol class="steps">
+<li>Посмотреть, куда расширять: в кадре должно остаться место под текст. Расширение «вверх» для сторис, «в стороны» для 16:9.</li>
+<li>Описать, что должно оказаться в новой части: «кирпичная стена, тёплый вечерний свет» — не «продолжи фон».</li>
+<li>Проверить, что новый край стыкуется со старым по цвету и освещению. Стык — место, где видно подмену.</li>
+<li>Текст на макете при расширении не растягивается и не дублируется. Если попал — править текстовым слоем в редакторе.</li>
+<li>Отдельно проверить безопасную зону: для сторис элементы не должны заходить в верхние и нижние 250 px.</li>
+</ol>
+
+<p class="prompt-lbl">Формулировка для расширения:</p>
+<div class="prompt">Расширить кадр вправо до соотношения 16:9.
+В новой части продолжить: [стена/фон], тот же ракурс,
+тот же свет, та же зернистость плёнки.
+Граница расширения не должна быть видна.
+Существующие объекты и надписи не изменять.</div>
+
+<div class="card alert">
+<strong>Важно про разрешение.</strong> Расширение кадра и увеличение разрешения — разные вещи. Расширение добавляет пиксели за счёт пустых зон, увеличение растягивает существующие. Ни то, ни другое не создаёт новую детализацию. Если исходник 1200 × 800 px, то для печати A4 его всё равно нужно перерисовывать или снимать заново — никакое увеличение не заменит исходник.
+</div>
+</section>
+
+<section>
+<h2>3. Увеличение разрешения — когда кадр идёт в печать или на большой формат</h2>
+<div class="grid">
+<div class="mini"><h4>Что делает</h4><p>Берёт готовый кадр и пересобирает его с большим числом пикселей, сглаживая артефакты.</p></div>
+<div class="mini"><h4>Чего не делает</h4><p>Не придумывает детали, которых не было. Мелкий текст останется мыльным, а не станет резче.</p></div>
+<div class="mini"><h4>Когда нужно</h4><p>Кадр снят или нарисован в невысоком разрешении, а идёт на билборд, в печать или в соцсеть с большим охватом.</p></div>
+</div>
+
+<div class="tblwrap"><table>
+<thead><tr><th>Инструмент</th><th>Что умеет</th><th>Тариф</th></tr></thead>
+<tbody>
+<tr class="pick"><td class="mname">Recraft</td><td>Увеличение разрешения, маска, вектор, экспорт в PSD</td><td class="price">Basic $12/мес<br>Pro $20/мес</td></tr>
+<tr><td class="mname">Topaz и Magnific в syntx.ai</td><td>Увеличение разрешения, отдельная оптимизация деталей</td><td class="price">оплата в рублях,<br>цена тарифа — в кабинете</td></tr>
+<tr><td class="mname">Genspark</td><td>Увеличение разрешения и правки слоёв, экспорт в PSD</td><td class="price">Free — 100 кредитов/день<br>Plus — $24,99/мес</td></tr>
+</tbody></table></div>
+</section>
+
+<section>
+<h2>4. Типовые ошибки и что делать</h2>
+<div class="tblwrap"><table>
+<thead><tr><th>Что произошло</th><th>Почему</th><th>Что сделать</th></tr></thead>
+<tbody>
+<tr><td>ИИ перерисовал весь макет</td><td>В промпте описана вся сцена, а не только правка</td><td>Описать только изменение и явно указать, что остальное не трогать</td></tr>
+<tr><td>Видна «нашивка» от маски</td><td>Замаскированная область слишком мала или заходит на границу объекта</td><td>Увеличить область с запасом, не задевая соседние элементы</td></tr>
+<tr><td>Цвет правки отличается от макета</td><td>Цвет описан словами, модель трактует по-своему</td><td>Задать цвет точным кодом и указать, что оттенок должен совпадать с окружением</td></tr>
+<tr><td>Текст на макете поплыл</td><td>Модель перерисовывает надписи при любой правке рядом</td><td>Текст вынести отдельным слоем: отрисовать картинку без надписей, текст добавить в редакторе</td></tr>
+<tr><td>Новый край кадра видно</td><td>Не описано, что именно должно быть в добавленной части</td><td>Описать материал, свет и ракурс продолжения — «продолжи фон» не работает</td></tr>
+<tr><td>Три попытки подряд не дают результата</td><td>Один и тот же инструмент с одним подходом</td><td>Сменить инструмент, а не повторять. Правка по описанию не сработала — берите маску</td></tr>
+<tr><td>Картинка «замылилась» после увеличения</td><td>Исходник был меньше нужного, деталей в нём нет</td><td>Увеличение даст мягкий кадр — перерисуйте исходник в большем разрешении</td></tr>
+<tr><td>Клиент не узнал исходный макет</td><td>Менялось слишком много за один проход</td><td>Править по одному элементу за раз, сохраняя промежуточный результат</td></tr>
+</tbody></table></div>
+</section>
+
+<section>
+<h2>5. Проверка результата — чек-лист</h2>
+<div class="grid">
+<div class="card"><h4 style="margin-top:0">Правка выполнена точечно</h4>
+<ul class="check">
+<li>Изменён только выделенный фрагмент</li>
+<li>Фон вокруг правки не изменился</li>
+<li>Цвет и фактура совпадают с окружением</li>
+<li>Текст и логотип не «поплыли»</li>
+<li>Стык расширенного края не виден</li>
+<li>Объект остался узнаваемым</li>
+</ul></div>
+<div class="card"><h4 style="margin-top:0">Готово к отправке клиенту</h4>
+<ul class="check">
+<li>Оригинал сохранён отдельно</li>
+<li>Результат сохранён отдельным файлом</li>
+<li>Разрешение соответствует требованиям площадки</li>
+<li>Надписи читаются, без артефактов</li>
+<li>Лицензия инструмента допускает коммерческое использование</li>
+</ul></div>
+</div>
+</section>
+
+<section>
+<div class="card alert">
+<strong>О тарифах и лицензиях.</strong> Цены указаны на 26 октября 2026 года и меняются. Отдельно про бесплатные тарифы Recraft: изображения, созданные на бесплатном тарифе, публичны, принадлежат Recraft и не лицензированы для коммерческого использования. Для клиентских работ Recraft бесплатным тарифом пользоваться нельзя. Genspark и syntx.ai начисляют кредиты по факту генерации — при объёме в несколько сотен изображений в месяц закладывайте бюджет заранее.
+</div>
+</section>
+
+</div></main>
+<footer><div class="wrap">
+Раздаточный материал №1 к занятию 3 «Редактирование + анимация + безопасность + финальный конвейер» · 26 октября 2026<br>
+Источники: <a href="https://www.recraft.ai/pricing" target="_blank">recraft.ai/pricing</a> · <a href="https://www.genspark.ai/pricing" target="_blank">genspark.ai/pricing</a> · <a href="https://syntx.ai/ru" target="_blank">syntx.ai</a> — тарифы проверены 26 октября 2026 года<br>
+Анимация и правовые вопросы — в <a href="https://mrvolkomorov.github.io/irina-animation-guide/" target="_blank">раздатке №2</a> и <a href="https://mrvolkomorov.github.io/irina-publish-checklist/" target="_blank">раздатке №3</a>
+</div></footer>
+</body></html>
